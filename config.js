@@ -87,10 +87,7 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = [996755994412
-	['996755994412', 'Benniismael', true]
-	// [number, dia creator/owner?, dia developer?]
-] // Put your number here
+global.owner = ['996755994412']
 global.mods = [] // Want some help?
 global.prems = [] // Premium user has unlimited limit
 global.APIs = { // API Prefix
@@ -101,7 +98,7 @@ global.APIs = { // API Prefix
 }
 global.APIKeys = { // APIKey Here
 	// 'https://website': 'apikey'
-	'https://ghostui-api.herokuapp.com/': 'OC2eTK'
+	'https://zenzapis.xyz/': '192e24e3a9b2'
 }
 // Sticker WM
 global.packname = 'ig : Beni_230\'Benniismael'
