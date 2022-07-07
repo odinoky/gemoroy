@@ -1,1 +1,0 @@
-web: node . anu --server
