@@ -87,7 +87,7 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = [
+global.owner = [996755994412
 	//  ['6281234288573'],
 	//['12546153210'],
 	//['62895368900456'],
