@@ -87,7 +87,14 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = ['996755994412']
+global.owner = [
+	//  ['6281234288573'],
+	//['12546153210'],
+	//['62895368900456'],
+	['996755994412', 'Benniismael', true]
+	// [number, dia creator/owner?, dia developer?]
+] // Put your number here
+global.owner = 
 global.mods = [] // Want some help?
 global.prems = [] // Premium user has unlimited limit
 global.APIs = { // API Prefix
