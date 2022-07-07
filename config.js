@@ -87,7 +87,7 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = [996755994412
+global.owner = [
 	//  ['6281234288573'],
 	//['12546153210'],
 	//['62895368900456'],
@@ -104,12 +104,12 @@ global.APIs = { // API Prefix
 }
 global.APIKeys = { // APIKey Here
 	// 'https://website': 'apikey'
-	'https://ghostui-api.herokuapp.com/': 'salahlo'
+	'https://ghostui-api.herokuapp.com/': 'OC2eTK'
 }
 // Sticker WM
 global.packname = 'ig : Beni_230\'Benniismael'
 global.author = 'BENNIISMAEL & GHOST'
-global.nomorown = '996755994412'
+global.nomorown = '62895368900456'
 global.multiplier = 69 // The higher, The harder levelup
 global.titlebot = `⫹⫺ RPG BOT Whatsapp | By ${author}`
 global.rpg = {
