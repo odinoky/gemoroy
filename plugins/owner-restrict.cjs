@@ -10,6 +10,7 @@ let handler = async (m, {
 		return conn.reply(m.chat, `*Format salah! Contoh :*\n\n	*○ ${usedPrefix + command} on*\n	*○ ${usedPrefix + command} off*`, m)
 	}
 	switch (text) {
+		case "вкл":
 		case "on":
 		case "enable":
 			let cek = db.data.settings[conn.user.jid].restrict
@@ -18,6 +19,7 @@ let handler = async (m, {
 			db.data.settings[conn.user.jid].restrict = true
 			conn.reply(m.chat, `*restrict berhasil diaktifkan pada bot ini*`, m)
 			break
+		case "выкл":
 		case "off":
 		case "disable":
 			let ce = db.data.settings[conn.user.jid].restrict

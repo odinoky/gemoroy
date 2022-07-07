@@ -297,7 +297,7 @@ let handler = async (m, {
 			// for (let tag of plugin.tags)
 			//   if (!(tag in tags)) tags[tag] = tag
 		}
-		conn.menu = conn.menu ? conn.menu : {}
+		conn.менюшка = conn.menu ? conn.menu : {}
 		let before = conn.menu.before || defaultMenu.before
 		let header = conn.menu.header || defaultMenu.header
 		let body = conn.menu.body || defaultMenu.body
