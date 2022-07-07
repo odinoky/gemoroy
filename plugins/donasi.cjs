@@ -8,7 +8,7 @@ let handler = async m => m.reply(`
 │ • Saweria [https://saweria.co/botstyle]
 ╰────
 ╭─「 Hubungi 」
-│ > Ingin donasi? Wa.me/77072763560
+│ > Ingin donasi? Wa.me/7996755994412
 ╰────
 `.trim()) // Tambah sendiri kalo mau
 handler.help = ['donasi']

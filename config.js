@@ -87,8 +87,8 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = ['77072763560'
-	['77072763560', 'Benniismael', true]
+global.owner = ['7996755994412'
+	['7996755994412', 'Benniismael', true]
 	// [number, dia creator/owner?, dia developer?]
 ] // Put your number here
 global.mods = [] // Want some help?
@@ -106,7 +106,7 @@ global.APIKeys = { // APIKey Here
 // Sticker WM
 global.packname = 'ig : Beni_230\'Benniismael'
 global.author = 'BENNIISMAEL & GHOST'
-global.nomorown = '77072763560'
+global.nomorown = '7996755994412'
 global.multiplier = 69 // The higher, The harder levelup
 global.titlebot = `⫹⫺ RPG BOT Whatsapp | By ${author}`
 global.rpg = {
