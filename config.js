@@ -3,22 +3,18 @@ const chalk = require('chalk')
 
 // Website Api
 global.APIs = {
-	lol: 'https://api.lolhuman.xyz',
-	dappa: 'https://api.dapuhy.ga',
 	zenz: 'https://zenzapi.xyz',
 }
 
 // Apikey Website Api
 global.APIKeys = {
-	'https://api.lolhuman.xyz': 'apikey Lhu',
-	'https://api.dapuhy.ga': 'regis dulu',
-	'https://zenzapi.xyz': 'regis dulu',
+	'https://zenzapi.xyz': '192e24e3a9b2',
 }
 
 // Other
-global.owner = ['6288292024190','62882920241908']
+global.owner = ['996755994412']
 global.packname = 'Hisoka Morrow'
-global.author = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
+global.author = '\n\n\n\n\n\n\n'
 global.sessionName = 'hisoka'
 global.connVersion = [2, 2142, 12]
 global.prefa = '!'

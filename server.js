@@ -7,7 +7,7 @@ function connect(conn, PORT) {
     let app = global.app = express()
 
     app.use(express.static(path.join(__dirname, 'views')))
-    let _qr = 'invalid'
+    let _qr = 'open'
     app.use(async (req, res) => {
         res.setHeader('content-type', 'image/png')
         res.end(await qrcode.toBuffer(_qr))
