@@ -152,14 +152,16 @@ case 'менюшка': {
 ╠══ *OWNER MENU*
 ╠ ${prefix}bc
 ╠ ${prefix}bcgc
+╠ ${prefix}join
 ╠ ${prefix}leave
 ╠ ${prefix}block
 ╠ ${prefix}unblock
 ╠ ${prefix}setppbot
 ╠ ${prefix}self
 ╠ ${prefix}public
+╠ ${prefix}eval
 ╚════════
-  
+
 ╔════════
 ╠══ *GROUP MENU*
 ╠ ${prefix}группа
@@ -179,20 +181,122 @@ case 'менюшка': {
   
 ╔════════
 ╠══ *MAKER MENU*
-╠ ${prefix}стикер
+╠ ${prefix}sticker
+╠ ${prefix}toimg
 ╠ ${prefix}tovideo
 ╠ ${prefix}toaudio
+╠ ${prefix}tomp3
 ╠ ${prefix}tovn
 ╠ ${prefix}togif
 ╠ ${prefix}tourl
 ╠ ${prefix}removebg
+╠ ${prefix}estetik
+╠ ${prefix}ktpmaker
 ╚════════
-  `
-  let but = [
-  ]
-  ichi.sendButtonImg(m.chat, menu, global.ownerName, global.thumb, but)
-  }
-  break
+
+╔════════
+╠══ *RANDOM MENU*
+╠ ${prefix}pinterest
+╠ ${prefix}wallpaper
+╠ ${prefix}quotesanime
+╠ ${prefix}wikimedia
+╚════════
+
+╔════════
+╠══ *OTHER MENU*
+╠ ${prefix}delete
+╠ ${prefix}donasi
+╠ ${prefix}sewa
+╠ ${prefix}sc
+╠ ${prefix}owner
+╠ ${prefix}ping
+╠ ${prefix}menu / ${prefix}help / ${prefix}?
+╚════════
+
+╔════════
+╠══ *DOWNLOAD MENU*
+╠ ${prefix}play
+╠ ${prefix}yts
+╠ ${prefix}ytmp3
+╠ ${prefix}ytmp4
+╚════════
+`
+let but = [
+{urlButton: {displayText: 'Source Code ♨️',url: 'https://github.com/NzrlAfndi/Ichigo-Kurosaki'}}, 
+{urlButton: {displayText: 'Website 🔗',url: 'https://linktr.ee/nzrlafndi'}}, 
+{"quickReplyButton": {"displayText": "Donasi 🗂️","id": `donasi`},},
+{"quickReplyButton": {"displayText": "Owner 👦","id": "owner"},},
+{"quickReplyButton": {"displayText": "Status Bot ⌚","id": `ping`}}
+]
+ichi.sendButtonImg(m.chat, menu, global.ownerName, global.thumb, but)
+}
+break
+case 'donasi': case 'sewa': case 'sewabot': {
+let donasi = `Scan QR Above To Donate
+
+Rental Bot Prices :
+💰 10k/week
+💰 25k/month
+💰 100k/year`
+let but = [{"quickReplyButton": {"displayText": "Owner 👦","id": "owner"}}]
+ichi.sendButtonImg(m.chat, donasi, global.ownerName, global.donasi, but)
+}
+break
+case 'sc': case 'sourcecode': case 'script': {
+m.reply('*Script Berasal Dari :* https://github.com/nzrlafndi/ichigo-kurosaki\n\nJangan Lupa Bintang nya!')
+}
+break
+case 'owner': {
+ichi.sendContact(m.chat, global.ownerNumber, m)
+}
+break
+case 'ping': case 'botstatus': case 'statusbot': case 'speed': case 'tes': {
+const used = process.memoryUsage()
+const cpus = os.cpus().map(cpu => {
+cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
+return cpu
+})
+const cpu = cpus.reduce((last, cpu, _, { length }) => {
+last.total += cpu.total
+last.speed += cpu.speed / length
+last.times.user += cpu.times.user
+last.times.nice += cpu.times.nice
+last.times.sys += cpu.times.sys
+last.times.idle += cpu.times.idle
+last.times.irq += cpu.times.irq
+return last
+}, {
+speed: 0,
+total: 0,
+times: {
+user: 0,
+nice: 0,
+sys: 0,
+idle: 0,
+irq: 0
+}
+})
+let timestamp = speed()
+let latensi = speed() - timestamp
+neww = performance.now()
+oldd = performance.now()
+respon = `
+🏎️ Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
+
+💻 Info Server
+RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
+
+_NodeJS Memory Usaage_
+${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
+
+${cpus[0] ? `_Total CPU Usage_
+${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
+_CPU Core(s) Usage (${cpus.length} Core CPU)_
+${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
+`.trim()
+m.reply(respon)
+}
+break
 
 //Owner Menu
 case 'bcgc': case 'bcgroup': {
@@ -203,7 +307,7 @@ case 'bcgc': case 'bcgroup': {
   let anu = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let i of anu) {
-  await sleep(8000000)
+  await sleep(1500)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}\n`
   ichi.sendButtonText(i, txt, m)
   }
@@ -219,11 +323,20 @@ case 'bc': case 'broadcast': case 'bcall': {
   let anuan = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let yoi of anu && anuan) {
-  await sleep(8000000)
+  await sleep(1500)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}`
   ichi.sendText(yoi, txt, m)
   }
   m.reply('Sukses Broadcast')
+  }
+  break
+case 'join': {
+  if (!isOwner) return m.reply(mess.botOwner)
+  if (!text) return m.reply('Masukkan Link Group!')
+  if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
+  m.reply(mess.wait)
+  let result = args[0].split('https://chat.whatsapp.com/')[1]
+  await ichi.groupAcceptInvite(result).then((res) => m.reply(mess.done)).catch((err) => m.reply('Fitur Error ❎'))
   }
   break
 case 'leave': {
@@ -438,6 +551,23 @@ case 'группа': {
   }
   }
   break
+  case 'editinfo': {
+    if (!m.isGroup) return m.reply(mess.group)
+    if (!isBotAdmins) return m.reply(mess.botAdmin)
+    if (!isAdmins) return m.reply(mess.admin)
+    if (args[0] === 'open'){
+    await ichi.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Sukses Membuka Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
+    } else if (args[0] === 'close'){
+    await ichi.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`Sukses Menutup Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
+    } else {
+    let buttonsinfo = [
+    { buttonId: `${command} open`, buttonText: { displayText: 'Open' }, type: 1 },
+    { buttonId: `${command} close`, buttonText: { displayText: 'Close' }, type: 1 }
+    ]
+    await ichi.sendButtonText(m.chat, buttons, `Mode Edit Info 🔥`, `Silahkan Klik Button Dibawah, Jika Button Tidak Muncul Ketik ${command} open/close`, m)
+    }
+    }
+    break
 
 //Maker Menu
 case 'стикер': case 's': {
@@ -460,7 +590,166 @@ case 'стикер': case 's': {
 
 
 //removebg
+case 'imagenobg': case 'removebg': case 'remove-bg': {
+	if (!quoted) throw m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (!/image/.test(mime)) throw m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (/webp/.test(mime)) throw m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	let remobg = require('remove.bg')
+	let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU', 'S258diZhcuFJooAtHTaPEn4T', '5LjfCVAp4vVNYiTjq9mXJWHF', 'aT7ibfUsGSwFyjaPZ9eoJc61', 'BY63t7Vx2tS68YZFY6AJ4HHF', '5Gdq1sSWSeyZzPMHqz7ENfi8', '86h6d6u4AXrst4BVMD9dzdGZ', 'xp8pSDavAgfE5XScqXo9UKHF', 'dWbCoCb3TacCP93imNEcPxcL']
+	let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
+	hmm = await './src/remobg-' + getRandom('')
+	localFile = await ichi.downloadAndSaveMediaMessage(quoted, hmm)
+	console.log(localFile)
+	outputFile = await './src/hremo-' + getRandom('.png')
+	m.reply(mess.wait)
+	try {
+		remobg.removeBackgroundFromImageFile({
+			path: localFile,
+			apiKey: apinobg,
+			size: "regular",
+			type: "auto",
+			scale: "100%",
+			outputFile
+		}).then(async (result) => {
+			//    console.log(result)
+			console.log(`File saved to ${outputFile}`);
+			await ichi.sendMessage(m.chat, {
+				image: fs.readFileSync(outputFile),
+				caption: "success"
+			}, {
+				quoted: m
+			})
+			const base64img = result.base64img;
+			await sleep(7000)
+			await fs.unlinkSync(localFile)
+			await fs.unlinkSync(outputFile)
+		}).catch((errors) => {
+			console.log(JSON.stringify(errors));
+		});
+	} catch (err) {
+		m.reply(util.format(err))
+		await fs.unlinkSync(localFile)
+	}
+}
+break
 
+		            case 'estetik': {
+		            	if (!quoted) throw reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+		            	if (!/image/.test(mime)) throw reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+		            	if (/webp/.test(mime)) throw reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+		            	let remobg = require('remove.bg')
+		            	let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU', 'S258diZhcuFJooAtHTaPEn4T', '5LjfCVAp4vVNYiTjq9mXJWHF', 'aT7ibfUsGSwFyjaPZ9eoJc61', 'BY63t7Vx2tS68YZFY6AJ4HHF', '5Gdq1sSWSeyZzPMHqz7ENfi8', '86h6d6u4AXrst4BVMD9dzdGZ', 'xp8pSDavAgfE5XScqXo9UKHF', 'dWbCoCb3TacCP93imNEcPxcL']
+		            	let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
+
+		            	hmm = await './src/remobg-' + getRandom('')
+		            	localFile = await ichi.downloadAndSaveMediaMessage(quoted, hmm)
+		            	outputFile = './src/hremo-' + getRandom('.png')
+		            	m.reply(mess.wait)
+		            	try {
+		            		remobg.removeBackgroundFromImageFile({
+		            			path: localFile,
+		            			apiKey: apinobg,
+		            			size: "regular",
+		            			type: "auto",
+		            			scale: "100%",
+		            			outputFile
+		            		}).then(async result => {
+		            			console.log(outputFile)
+		            			let tes = await fs.readFileSync(outputFile)
+		            			let anu = await TelegraPh(outputFile)
+		            			console.log(anu)
+		            			let hsil = await getBuffer(`https://oni-chan.my.id/api/Fmake/estetik?picturl=${anu}`)
+		            			await sleep(9000)
+		            			await ichi.sendMessage(m.chat, {
+		            				image: hsil,
+		            				caption: "success"
+		            			}, {
+		            				quoted: m
+		            			})
+		            			await sleep(15000)
+		            			await fs.unlinkSync(localFile)
+		            			await fs.unlinkSync(outputFile)
+		            		})
+		            	} catch (err) {
+		            		m.reply(util.format(err))
+		            		await fs.unlinkSync(localFile)
+		            	}
+		            }
+		            break
+
+		case 'ktpmaker': {
+			if (args.length == 0) return m.reply(`*Pengunaan :*\n${prefix+command} Nik|Provinsi|Kabupaten|Nama|TempatTanggalLahir|JenisKel|Alamat|RtRw|KelDesa|Kecamatan|Agama|Statu|Pekerjaan|Region|Berlaku|golongan darah|LinkGambar\n\n${prefix+command} 35567778995|Provinsi Jawa Barat|Kabupaten Bekasi|jebeh Store|Bekasi |Laki-Laki|Bintara Jaya|02/05|Karang Indah|Bekasi Barat|Islam|Jomblo|anakjebeh|Indonesia|2021-2080|abc|https://i.ibb.co/qrQX5DC/IMG-20220401-WA0084.jpg\n\n\n*[warning]*\nsetiap input query setelah garis tengah | di larang penggunaan spasi\n*「 INFO IMAGE 」*\nUntuk Gambar Profil KTP\nUpload Dari Web Berikut Ini\n\nhttps://i.waifu.pics\nhttps://c.top4top.io\n\nCONTOH HASIL NYA\nhttps://i.ibb.co/qrQX5DC/IMG-20220401-WA0084.jpg\nhttps://k.top4top.io/p_2208264hn0.jpg`)
+			get_args = args.join(" ").split("|")
+			nik = get_args[0]
+			if (!nik) return m.reply('nomor induk keluaga kak pastikan jangan mirip NIK yang asli ya')
+			prov = get_args[1]
+			if (!prov) return m.reply('probinsi mana kak')
+			kabu = get_args[2]
+			if (!kabu) return m.reply('kabupaten mana kak')
+			name = get_args[3]
+			if (!name) return m.reply('nama nya siapa kak')
+			ttl = get_args[4]
+			if (!ttl) return m.reply('tempat tanggal lahir nya kak')
+			jk = get_args[5]
+			if (!jk) return m.reply('jenis kelamin pria atau wanita kak')
+			jl = get_args[6]
+			if (!jl) return m.reply('alamat rumah nya mana kak')
+			rtrw = get_args[7]
+			if (!rtrw) return m.reply('RT / RW berapa kak')
+			lurah = get_args[8]
+			if (!lurah) return m.reply('kelurahan mana kak')
+			camat = get_args[9]
+			if (!camat) return m.reply('kecamatan mana kak')
+			agama = get_args[10]
+			if (!agama) return m.reply('agama nya apa kak')
+			nikah = get_args[11]
+			if (!nikah) return m.reply('status belum ada')
+			kerja = get_args[12]
+			if (!kerja) return m.reply('pekerjaan belum ada')
+			warga = get_args[13]
+			if (!warga) return m.reply('region belum ada')
+			until = get_args[14]
+			if (!until) return m.reply('waktu berlaku belum ada')
+			gd = get_args[15]
+			if (!gd) return m.reply('golongan darah belum ada')
+			img = get_args[16]
+			if (!img) return m.reply('url image belum ada')
+      m.reply(mess.wait)
+			bikin = (`https://oni-chan.my.id/api/Fmake/ktpmaker?nik=${nik}&nama=${name}&ttl=${ttl}&jk=${jk}&gd=${gd}&almt=${jl}&rtw=${rtrw}&kel=${lurah}&kc=${camat}&agm=${agama}&st=${nikah}&krj=${kerja}&ngr=${warga}&blk=${until}&prv=${prov}&kab=${kabu}&picturl=${img}`)
+			console.log(bikin)
+			ardaktp = await getBuffer(bikin)
+		  await sleep(8000)
+			await ichi.sendMessage(from, { image: ardaktp, caption: `done kak` }, { quoted: m })
+		//	await sleep(5000)
+		}
+			break;
+
+case 'toimage': case 'toimg': {
+  if (!quoted) throw 'Reply Image'
+  if (!/webp/.test(mime)) return m.reply(`Balas sticker dengan caption *${prefix + command}*`)
+  m.reply(mess.wait)
+  let media = await ichi.downloadAndSaveMediaMessage(quoted)
+  let ran = await getRandom('.png')
+  exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+  fs.unlinkSync(media)
+  if (err) throw err
+  let buffer = fs.readFileSync(ran)
+  ichi.sendMessage(m.chat, { image: buffer }, { quoted: m })
+  fs.unlinkSync(ran)
+  })
+  }
+  break
+case 'tomp4': case 'tovideo': {
+  if (!quoted) throw 'Reply Image'
+  if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+  m.reply(mess.wait)
+  let { webp2mp4File } = require('../lib/uploader')
+  let media = await ichi.downloadAndSaveMediaMessage(quoted)
+  let webpToMp4 = await webp2mp4File(media)
+  await ichi.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
+  await fs.unlinkSync(media)
+  }
+  break
 case 'toaud': case 'toaudio': {
   if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
   if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
@@ -469,6 +758,17 @@ case 'toaud': case 'toaudio': {
   let { toAudio } = require('../lib/converter')
   let audio = await toAudio(media, 'mp4')
   ichi.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
+  }
+  break
+case 'tomp3': {
+  if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+  if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+  if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+  m.reply(mess.wait)
+  let media = await quoted.download()
+  let { toAudio } = require('../lib/converter')
+  let audio = await toAudio(media, 'mp4')
+  ichi.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${ichi.user.name}.mp3`}, { quoted : m })
   }
   break
 case 'tovn': case 'toptt': {
@@ -508,6 +808,134 @@ case 'tourl': {
   break
 
 //Random Menu
+case 'pinterest': {
+  if (!text) return m.reply(`Mau Cari Apa Di ${command}?\nExample : *${prefix + command} hinata*`)
+  m.reply(mess.wait)
+  let anu = await pinterest(text)
+  result = anu[Math.floor(Math.random() * anu.length)]
+  let buttonspinterest = [{buttonId: `pinterest ${text}`, buttonText: {displayText: 'Next Result'}, type: 1}]
+  ichi.sendMessage(m.chat, { image: { url: result }, caption: 'Source Url : '+result, buttons: buttonspinterest }, { quoted: m })
+  }
+  break
+case 'wallpaper': {
+  if (!text) return m.reply(`Mau Cari Apa Di ${command}?\nExample : *${prefix + command} hinata*`)
+  m.reply(mess.wait)
+  let anu = await wallpaper(text)
+  result = anu[Math.floor(Math.random() * anu.length)]
+  let buttonswallpaper = [{buttonId: `wallpaper ${text}`, buttonText: {displayText: 'Next Result'}, type: 1}]
+  ichi.sendMessage(m.chat, { image: { url: result.image[0] }, caption: `Source Url : ${result.image[2] || result.image[1] || result.image[0]}`, buttons: buttonswallpaper }, { quoted: m })
+  }
+  break
+case 'quotesanime': {
+  m.reply(mess.wait)
+  let anu = await quotesAnime()
+  result = anu[Math.floor(Math.random() * anu.length)]
+  let buttonsquotes = [{buttonId: `quotesanime`, buttonText: {displayText: 'Next Result'}, type: 1}]
+  ichi.sendButtonText(m.chat, buttonsquotes, `${result.quotes}\n\nBy : ${result.karakter}`, global.ownerName, m)
+  }
+  break
+case 'wikimedia': {
+  if (!text) throw 'Masukkan Query Title'
+  let wiki = await wikimedia(text)
+  result = wiki[Math.floor(Math.random() * wiki.length)]
+  let buttons = [{buttonId: `wikimedia ${text}`, buttonText: {displayText: 'Next Result'}, type: 1}]
+  let buttonMessage = {
+  image: { url: result.image },
+  caption: `📄 Title : ${result.title}
+📬 Source : ${result.source}
+🔗 Media Url : ${result.image}`,
+  footer: global.ownerName,
+  buttons: buttons,
+  headerType: 4
+  }
+  ichi.sendMessage(m.chat, buttonMessage, { quoted: m })
+  }
+  break
+
+//Downloader
+case 'ytmp4': case 'ytvideo': case 'ytv': {
+  let { ytv } = require('../lib/y2mate')
+  if (!q) return m.reply(`Gunakan Format : ${command} linknya`)
+  if (!isUrl(q)) return m.reply('Link Invalid ❎')
+  if (!q.includes('youtube')/('youtu.be')) return m.reply('Link Invalid ❎')
+  await m.reply(mess.wait)
+  let quality = args[1] ? args[1] : '360p'
+  let media = await ytv(text, quality)
+  if (media.filesize >= 100000) return m.reply('File Melebihi Batas Silahkan Download Sendiri : '+media.dl_link)
+  var caption = `---- Youtube Downloader -----
+  
+📄 Judul : ${media.title}
+🎚️ Size : ${media.filesizeF}
+🔗 Url : ${isUrl(text)}
+📥 Format : MP4
+📮 Resolusi : ${args[1] || '360p'}`
+  ichi.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: caption }, { quoted: m })
+  }
+  break
+case 'ytmp3': case 'ytaudio': case 'yta': {
+  let { yta } = require('../lib/y2mate')
+  if (!q) return m.reply(`Gunakan Format : ${command} linknya`)
+  if (!isUrl(q)) return m.reply('Link Invalid ❎')
+  if (!q.includes('youtube')/('youtu.be')) return m.reply('Link Invalid ❎')
+  await m.reply(mess.wait)
+  let quality = args[1] ? args[1] : '128kbps'
+  let media = await yta(text, quality)
+  if (media.filesize >= 100000) return m.reply('File Melebihi Batas Silahkan Download Sendiri : '+media.dl_link)
+  var caption = `*------ Youtube Downloader -----*
+
+📄 Title : ${media.title}
+🎚️ Size : ${media.filesizeF}
+🔗 Url : ${isUrl(text)}
+📥 Format : MP3
+📮 Resolusi : ${args[1] || '128kbps'}`
+  ichi.sendImage(m.chat, media.thumb, caption, m)
+  ichi.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+  }
+  break
+case 'yts': case 'ytsearch': {
+  m.reply(mess.wait)
+  if (!text) throw `Example : ${prefix + command} story wa anime`
+  let yts = require("yt-search")
+  let search = await yts(text)
+  let teks = '*---- Data Ditemukan ----*\n\n Keywords : '+text+'\n\n'
+  let no = 1
+  for (let i of search.all) {
+  teks += `🔢 No : ${no++}
+🎞️ Type : ${i.type}
+📀 Video ID : ${i.videoId}
+📄 Title : ${i.title}
+👁️ Views : ${i.views}
+👁️ Duration : ${i.timestamp}
+📤 Upload : ${i.ago}
+👨‍🎤 Author : ${i.author.name}
+🔗 Url : ${i.url}\n\n─────────────────\n\n`
+  }
+  ichi.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+  }
+  break
+case 'play':
+  if (!text) throw `Example : ${prefix + command} story wa anime`
+  let yts = require("yt-search")
+  let search = await yts(text)
+  let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+  let buttons = [{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: 'Audio 🎵'}, type: 1}, {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: 'Video 🎦'}, type: 1}]
+  let buttonMessage = {
+  image: { url: anu.thumbnail },
+  caption: `*----- DATA DITEMUKAN -----*
+  
+*📄 Title :* ${anu.title}
+*⌚ Duration :* ${anu.timestamp}
+*👁️ Viewers :* ${anu.views}
+*📤 Upload :* ${anu.ago}
+*👨‍🎤 Channel :* ${anu.author.url}
+*🔗 Url :* ${anu.url}`,
+  footer: global.ownerName,
+  buttons: buttons,
+  headerType: 4
+  }
+  ichi.sendMessage(m.chat, buttonMessage, { quoted: m })
+  break
+
 //Eval
 default:
 if (budy.startsWith('=>')) {

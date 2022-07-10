@@ -1,5 +1,5 @@
 {
-  "name": "qwerty",
+  "name": "gemoroy",
   "version": "1.0.0",
   "description": "WhatsApp Using Lib Baileys Multi Device",
   "main": "connect/index.js",
@@ -73,10 +73,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/odinoky/qwerty.git"
+    "url": "https://github.com/odinoky/gemoroy.git"
   },
   "bugs": {
-    "url": "https://github.com/odinoky/qwerty/issues"
+    "url": "https://github.com/odinoky/gemoroy/issues"
   },
-  "homepage": "https://github.com/odinoky/qwerty#readme"
+  "homepage": "https://github.com/odinoky/gemoroy#readme"
 }
