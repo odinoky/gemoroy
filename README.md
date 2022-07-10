@@ -1,20 +1,31 @@
-# Hisoka-Morrow
-
 <p align="center">
-	<img src="https://telegra.ph/file/ae5237e860bbe4ac2f0a8.jpg" width="35%" style="margin-left: auto;margin-right: auto;display: block;">
-</p>
-<h1 align="center">Hisoka-Morrow</h1>
+<img src="https://telegra.ph/file/5bd80998f8262a0a5e64f.jpg" alt="Ichigo Kurosaki" width="500"/>
 
-## Set Setting 
-* set number owner & set api on [this](https://github.com/DikaArdnt/Hisoka-Morrow/blob/master/config.js) file
-* Get apikey dapuhy from [this](https://api.dapuhy.ga/)
-* Get apikey lolhuman from [this](https://api.lolhuman.xyz/)
-* Get apikey zenz from [this](https://zenzapi.xyz/)
+Base Bot WhatsApp Multi Device With [`Baileys Multi Device`](https://github.com/adiwajshing)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DikaArdnt/Hisoka-Morrow)
+## Note
+Base Ini Free Untuk Semua, Tidak Untuk Diperjualbelikan Kecuali Lu Udah Tambahin Fitur Langka Di Script Ini Baru Boleh Jual
 
+## Thanks To
+* [`Adiwajshing`](https://github.com/adiwajshing)
+* [`Nurutomo`](https://github.com/Nurutomo)
+* [`Fandyyy`](https://github.com/FBOTZ-YT)
+* [`FERDIZ-afk`](https://github.com/FERDIZ-afk)
 
-## UNTUK PENGGUNA WINDOWS/VPS/RDP
+## Connect With Me
+* [`Group WhatsApp`](https://chat.whatsapp.com/CSqakw6x2wRIOWTPL5a6a9)
+* [`Whatsapp`](https://wa.me/6285609233482?text=Assalamualaikum)
+* [`Instagram`](https://instagram.com/_nzrlafndi)
+* [`More...`](https://linktr.ee/NzrlAfndi)
+
+## Donate Me
+* [`Saweria`](https://saweria.co/Fandyy)
+* [`Gopay`](https://telegra.ph/file/4abd43eeab0c17edebff2.jpg)
+
+## License
+License: [MIT](https://en.wikipedia.org/wiki/MIT_License)
+
+## UNTUK PENGGUNA WINDOWS/RDP
 
 * Unduh & Instal Git [`Klik Disini`](https://git-scm.com/downloads)
 * Unduh & Instal NodeJS [`Klik Disini`](https://nodejs.org/en/download)
@@ -22,12 +33,19 @@
 
 
 ```bash
-git clone https://github.com/DikaArdnt/Hisoka-Morrow
-cd Hisoka-Morrow
-npm i
-npm update
-node .
+git clone https://github.com/NzrlAfndi/Ichigo-Kurosaki
+cd Ichigo-Kurosaki
+yarn
+npm start
 ```
+
+
+## FOR HEROKU USER
+# Install Buildpack
+- heroku/nodejs
+- https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
+- https://github.com/clhuang/heroku-buildpack-webp-binaries.git
+
 
 ## FOR TERMUX/UBUNTU/SSH USER
 
@@ -36,44 +54,25 @@ apt update && apt upgrade
 apt install git -y
 apt install nodejs -y
 apt install ffmpeg -y
-apt install imagemagick -y
-git clone https://github.com/DikaArdnt/Hisoka-Morrow
-cd Hisoka-Morrow
-npm install
+pkg install yarn
+git clone https://github.com/NzrlAfndi/Ichigo-Kurosaki
+cd Ichigo-Kurosaki
+yarn
+npm start
 ```
 
-## INSTALL ON TERMUX WITH UBUNTU
-
-[ INSTALLING UBUNTU ]
-
+## Installing
 ```bash
-apt-get update && apt-get upgrade -y
-apt-get install wget -y
-apt-get install proot -y
-apt-get install git -y
-cd
-git clone https://github.com/MFDGaming/ubuntu-in-termux.git
-cd ubuntu-in-termux
-chmod +x ubuntu.sh
-./ubuntu.sh -y
-./startubuntu.sh
+$ node .
+#standr run
+$ npm run dev
+#run use nodemon
 ```
----------
 
-## UNTUK PENGGUNA HEROKU
+## ❗ Warning
+WhatsApp bot is still in the development stage, so there are a few bugs
+WhatsApp Connection (BETA, not working perfectly)
 
-### Instal Buildpack
-* heroku/nodejs
-* https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
+Editing Number Owner And More On [`settings.js`](https://github.com/NzrlAfndi/Ichigo-Kurosaki/blob/master/settings.js)
 
-# Thanks To
-* [`@adiwajshing/baileys`](https://github.com/adiwajshing/Baileys)
-* [`Nurutomo/wabot-aq`](https://github.com/Nurutomo/wabot-aq)
-* [`MhankBarBar`](https://github.com/MhankBarBar/weabot)
-* [`Ariffb`](https://github.com/ariffb25/stikerinbot)
-* [`BochilGaming`](https://github.com/BochilGaming/games-wabot)
-* [`Dika Ardnt.`](https://github.com/DikaArdnt/Hisoka-Morrow)
 
-Note: this is a script that copy pastes from someone else's script, so don't bully me om
-
-Gada base base an, copas adanya

@@ -1,13 +1,7 @@
 {
-	"name": "Hisoka-Morrow",
-	"description": "WhatsApp Bot Using Lib Baileys",
-	"repository": "https://github.com/DikaArdnt/Hisoka-Morrow",
+	"name": "Ichigo Kurosaki",
+	"description": "WhatsApp Bot With Baileys Multi Device",
+	"repository": "https://github.com/NzrlAfndi/Ichigo-Kurosaki",
 	"logo": "https://node-js-sample.herokuapp.com/node.png",
-	"keywords": [
-    "WhatsApp",
-    "Bot",
-    "WhatsApp",
-    "Api",
-    "Baileys"
-  ]
+	"keywords": ["multi-device", "base"]
 }
