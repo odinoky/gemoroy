@@ -15,7 +15,7 @@ global.ownerNumber = ['77072763560','996755994412']
 global.ownerName = '*ВАНИЛЬКА*'
 global.packname = 'стикеры'
 global.author = '*от ВАНИЛЬКИ*'
-global.prefa = ['#','!'] //Ilangin Prefix Yang '' Kalau Gamau No Prefix
+prefix = ['#','!'] //Ilangin Prefix Yang '' Kalau Gamau No Prefix
 global.sessionName = 'sesi'
 
 //Message Nya Ubah Disini
