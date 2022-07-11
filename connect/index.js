@@ -6,7 +6,7 @@
 */
 
 require('../settings')
-const { default: makeWASocket, useSingleFileAuthState, connectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -97,22 +97,22 @@ ichi.ev.on('connection.update', async (update) => {
 	try {
 		if (connection === 'close') {
 			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-			if (reason === connectReason.badSession) {
+			if (reason === DisconnectReason.badSession) {
 				console.log(`Bad Session File, Please Delete Session and Scan Again`);
-			} else if (reason === connectReason.connectionClosed) {
+			} else if (reason === DisconnectReason.connectionClosed) {
 				console.log("Connection closed, reconnecting....");
 				startIchigo();
-			} else if (reason === connectReason.connectionLost) {
+			} else if (reason === DisconnectReason.connectionLost) {
 				console.log("Connection Lost from Server, reconnecting...");
 				startIchigo();
-			} else if (reason === connectReason.connectionReplaced) {
+			} else if (reason === DisconnectReason.connectionReplaced) {
 				console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-			} else if (reason === connectReason.loggedOut) {
+			} else if (reason === DisconnectReason.loggedOut) {
 				console.log(`Device Logged Out, Please Scan Again And Run.`);
-			} else if (reason === connectReason.restartRequired) {
+			} else if (reason === DisconnectReason.restartRequired) {
 				console.log("Restart Required, Restarting...");
 				startIchigo();
-			} else if (reason === connectReason.timedOut) {
+			} else if (reason === DisconnectReason.timedOut) {
 				console.log("Connection TimedOut, Reconnecting...");
 				startIchigo();
 			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
