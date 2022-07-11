@@ -6,7 +6,7 @@
 */
 
 require('../settings')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: makeWASocket, useSingleFileAuthState, connectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -91,8 +91,7 @@ console.log(err)
 //Connection Active
 ichi.ev.on('connection.update', async (update) => {
 	const {
-		connection,
-		lastDisconnect
+		connection
 	} = update
 	try {
 		if (connection === 'close') {
