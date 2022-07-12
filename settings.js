@@ -10,6 +10,14 @@ const chalk = require('chalk')
 
 // Website Api
 
+global.APIs = {
+	zenz: 'https://zenzapis.xyz',
+}
+
+// Apikey Website Api
+global.APIKeys = {
+	'https://zenzapis.xyz': '192e24e3a9b2',
+}
 //Ubah Disini
 global.ownerNumber = ['77072763560','996755994412']
 global.ownerName = '*ВАНИЛЬКА*'
