@@ -114,7 +114,7 @@ ichi.ev.on('connection.update', async (update) => {
 			} else if (reason === DisconnectReason.timedOut) {
 				console.log("Connection TimedOut, Reconnecting...");
 				startIchigo();
-			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
+			} else ichi(`Unknown connectReason: ${reason}|${connection}`)
 		}
 		if (update.connection === "connecting" || update.receivedPendingNotifications === "false") {
 			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
