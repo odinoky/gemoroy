@@ -20,5 +20,5 @@ RUN ls
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 8080:8000:5000
 CMD ["npm","run","dev"] #run via nodemon
