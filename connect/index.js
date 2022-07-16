@@ -89,11 +89,7 @@ console.log(err)
 })
 
 //Connection Active
-    kagura.public = true
-
-    kagura.serializeM = (m) => smsg(kagura, m, store)
-
-    kagura.ev.on('connection.update', async (update) => {
+ichi.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode
@@ -581,43 +577,45 @@ ichi.serializeM = (m) => smsg(ichi, m, store)
    return proto.WebMessageInfo.fromObject(copy)
    }
 
+
   /**
    * 
    * @param {*} path 
    * @returns 
    */
    ichi.getFile = async (PATH, save) => {
-   let res
-   let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
-   //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
-   let type = await FileType.fromBuffer(data) || {
-   mime: 'application/octet-stream',
-   ext: '.bin'
-   }
-   filename = path.join(__filename, '../src/' + new Date * 1 + '.' + type.ext)
-   if (data && save) fs.promises.writeFile(filename, data)
-   return {
-   res,
-   filename,
-   size: await getSizeMedia(data),
-   ...type,
-   data
-   }
-   }
-
-   return ichi
-} catch (err) {
-console.log(err)
-startIchigo()
-}
-}
-
-startIchigo()
-
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-fs.unwatchFile(file)
-console.log(chalk.redBright(`Update ${__filename}`))
-delete require.cache[file]
-require(file)
-})
+    let res
+    let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
+    //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
+    let type = await FileType.fromBuffer(data) || {
+    mime: 'application/octet-stream',
+    ext: '.bin'
+    }
+    filename = path.join(__filename, '../src/' + new Date * 1 + '.' + type.ext)
+    if (data && save) fs.promises.writeFile(filename, data)
+    return {
+    res,
+    filename,
+    size: await getSizeMedia(data),
+    ...type,
+    data
+    }
+    }
+ 
+    return ichi
+ } catch (err) {
+ console.log(err)
+ startIchigo()
+ }
+ }
+ 
+ startIchigo()
+ 
+ let file = require.resolve(__filename)
+ fs.watchFile(file, () => {
+ fs.unwatchFile(file)
+ console.log(chalk.redBright(`Update ${__filename}`))
+ delete require.cache[file]
+ require(file)
+ })
+ 
