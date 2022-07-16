@@ -94,12 +94,12 @@ ichi.ev.on('connection.update', async (update) => {
   if (connection === 'close') {
   let reason = new Boom(lastDisconnect?.error)?.output.statusCode
       if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); ichi.logout(); }
-      else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startichi(); }
-      else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startichi(); }
+      else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startIchigo(); }
+      else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startIchigo(); }
       else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); ichi.logout(); }
       else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); ichi.logout(); }
-      else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startichi(); }
-      else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startichi(); }
+      else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startIchigo(); }
+      else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startIchigo(); }
       else ichi.end(`Unknown DisconnectReason: ${reason}|${connection}`)
   }
   console.log('Connected...', update)
