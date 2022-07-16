@@ -603,19 +603,18 @@ ichi.serializeM = (m) => smsg(ichi, m, store)
     }
  
     return ichi
- } catch (err) {
- console.log(err)
- startIchigo()
- }
- }
- 
- startIchigo()
- 
- let file = require.resolve(__filename)
- fs.watchFile(file, () => {
- fs.unwatchFile(file)
- console.log(chalk.redBright(`Update ${__filename}`))
- delete require.cache[file]
- require(file)
- })
- 
+  } catch (err) {
+  console.log(err)
+  startIchigo()
+  }
+  }
+  
+  
+  let file = require.resolve(__filename)
+  fs.watchFile(file, () => {
+  fs.unwatchFile(file)
+  console.log(chalk.redBright(`Update ${__filename}`))
+  delete require.cache[file]
+  require(file)
+  })
+  
