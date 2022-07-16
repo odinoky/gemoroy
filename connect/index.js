@@ -89,6 +89,10 @@ console.log(err)
 })
 
 //Connection Active
+ichi.public = true
+
+ichi.serializeM = (m) => smsg(ichi, m, store)
+
 ichi.ev.on('connection.update', async (update) => {
   const { connection, lastDisconnect } = update	    
   if (connection === 'close') {
