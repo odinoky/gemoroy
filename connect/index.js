@@ -6,7 +6,7 @@
 */
 
 require('../settings')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: makeWASocket, useSingleFileAuthState, connectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -76,9 +76,7 @@ ppuser = await ichi.profilePictureUrl(num, 'image')
 ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
 }
 if (anu.action == 'add') {
-  stst = await client.getStatus(`${num.split('@')[0]}@c.us`)
-  stst = stst.status == 401 ? '' : stst.status
-tekswell = `Добро пожаловать в нашу группу!\n Ознакомтесь пожайлуста с правилами группы!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n⤔ *Bio*: ${stst}\n*――――――――――――――*\n\nНадеюсь, вам понравится в нашей группе!!! 🎊🎊🎉!`
+tekswell = `Добро пожаловать в нашу группу!\n Ознакомьтесь пожалуйста с правилами нашей группы.!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n*――――――――――――――*\n\nНадеемся Вам у нас понравится 🤝!`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
 teksbye = `До свидание участник\n Были рады знакомству! @${num.split("@")[0]} 👋`
@@ -91,27 +89,45 @@ console.log(err)
 })
 
 //Connection Active
-ichi.public = true
-
-ichi.serializeM = (m) => smsg(ichi, m, store)
-
 ichi.ev.on('connection.update', async (update) => {
-  const { connection, lastDisconnect } = update	    
-  if (connection === 'close') {
-  let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-      if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); ichi.logout(); }
-      else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startIchigo(); }
-      else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startIchigo(); }
-      else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); ichi.logout(); }
-      else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); ichi.logout(); }
-      else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startIchigo(); }
-      else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startIchigo(); }
-      else ichi.end(`Unknown DisconnectReason: ${reason}|${connection}`)
-  }
-  console.log('Connected...', update)
+	const {
+		connection
+	} = update
+	try {
+		if (connection === 'close') {
+			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
+			if (reason === connectReason.badSession) {
+				console.log(`Bad Session File, Please Delete Session and Scan Again`);
+			} else if (reason === connectReason.connectionClosed) {
+				console.log("Connection closed, reconnecting....");
+				startIchigo();
+			} else if (reason === connectReason.connectionLost) {
+				console.log("Connection Lost from Server, reconnecting...");
+				startIchigo();
+			} else if (reason === connectReason.connectionReplaced) {
+				console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
+			} else if (reason === connectReason.loggedOut) {
+				console.log(`Device Logged Out, Please Scan Again And Run.`);
+			} else if (reason === connectReason.restartRequired) {
+				console.log("Restart Required, Restarting...");
+				startIchigo();
+			} else if (reason === connectReason.timedOut) {
+				console.log("Connection TimedOut, Reconnecting...");
+				startIchigo();
+			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
+		}
+		if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
+			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
+		}
+		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
+			lolcatjs.fromString(`[Connecting to] WhatsApp web`)
+			lolcatjs.fromString(`[Connected] ` + JSON.stringify(ichi.user, null, 2))
+		}
+	} catch (err) {
+		console.log(err)
+		startIchigo();
+	}
 })
-
-ichi.ev.on('creds.update', saveState)
 
 
 //add detek pesan react emoji by FERDIZ AFK
