@@ -40,7 +40,7 @@ try{
 const ichi = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ["Ichigo Kurosaki", "Safari", "3.0"],
+browser: ["Ichigo Kurosaki", "Edge", "3.0"],
 auth: state
 })
 
