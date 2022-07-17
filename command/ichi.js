@@ -301,29 +301,29 @@ m.reply(respon)
 break
 case 'addvn': {
   if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
-  if(!data.isQuotedAudio) return data.reply('Reply vn/audio!')
-  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
-  if(vn.includes(data.body)) return data.reply('Nama vn sudah ada, harap gunakan nama lain')
-  nv = await data.downloadMediaQuotedMessage()
-  fs.writeFileSync(`./lib/vn/${data.body}.mp3`, nv)
-  global.vn.push(data.body)
+  if(isQuotedAudio) return reply('Reply vn/audio!')
+  if(body == "") return reply(`Kirim perintah ${prefix}addvn [ nama ]\nContoh ${command}addvn hai`)
+  if(vn.includes(body)) return reply('Nama vn sudah ada, harap gunakan nama lain')
+  nv = await downloadMediaQuotedMessage()
+  fs.writeFileSync(`./lib/vn/${body}.mp3`, nv)
+  global.vn.push(body)
   fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn))
-  data.reply(`Berhasil menambahkan vn ${data.body} dari database`)
+  reply(`Berhasil menambahkan vn ${body} dari database`)
 }
 case 'delvn': {
   if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
-  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
-  if(!vn.includes(data.body)) return data.reply('vn tidak ditemukan!')
-  global.vn.splice(vn.indexOf(data.body), 1)
+  if(body == "") return reply(`Kirim perintah ${prefix}addvn [ nama ]\nContoh ${command}addvn hai`)
+  if(!vn.includes(body)) return reply('vn tidak ditemukan!')
+  global.vn.splice(vn.indexOf(body), 1)
   fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn, null, 2))
-  fs.unlinkSync(`./lib/vn/${data.body}.mp3`)
-  data.reply(`Berhasil mengahpus vn ${data.body} dari database`)
+  fs.unlinkSync(`./lib/vn/${body}.mp3`)
+  reply(`Berhasil mengahpus vn ${body} dari database`)
 }
 case 'listvn': {
   if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
   let listvn = 'Ketik nama vn untuk mendownload vn\n\n*List vn*:\n\n'
   vn.forEach((vnn, i) => listvn += `*${i+1}*. ${vnn}\n`)
-  data.reply(listvn)
+  reply(listvn)
 }
 
 
