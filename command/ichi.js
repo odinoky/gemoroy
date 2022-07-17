@@ -140,32 +140,6 @@ if (!m.key.fromMe && !isOwner) return
 }
 
 
-Client.cmd.on('addvn', async (data) => {
-  if(!data.isOwner) return data.reply(mess.botOwner)
-  if(!data.isQuotedAudio) return data.reply('Reply vn/audio!')
-  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
-  if(vn.includes(data.body)) return data.reply('Nama vn sudah ada, harap gunakan nama lain')
-  nv = await data.downloadMediaQuotedMessage()
-  fs.writeFileSync(`./lib/vn/${data.body}.mp3`, nv)
-  global.vn.push(data.body)
-  fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn))
-  data.reply(`Berhasil menambahkan vn ${data.body} dari database`)
-})
-Client.cmd.on('delvn', async (data) => {
-  if(!data.isOwner) return data.reply(mess.botOwner)
-  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
-  if(!vn.includes(data.body)) return data.reply('vn tidak ditemukan!')
-  global.vn.splice(vn.indexOf(data.body), 1)
-  fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn, null, 2))
-  fs.unlinkSync(`./lib/vn/${data.body}.mp3`)
-  data.reply(`Berhasil mengahpus vn ${data.body} dari database`)
-})
-Client.cmd.on('listvn', async (data) => {
-  if(!data.isOwner) return data.reply(mess.botOwner)
-  let listvn = 'Ketik nama vn untuk mendownload vn\n\n*List vn*:\n\n'
-  vn.forEach((vnn, i) => listvn += `*${i+1}*. ${vnn}\n`)
-  data.reply(listvn)
-})
 
 //Push Message To Console
 if (m.message) {
@@ -325,6 +299,33 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 m.reply(respon)
 }
 break
+case 'addvn': {
+  if(!data.isOwner) return data.reply(mess.botOwner)
+  if(!data.isQuotedAudio) return data.reply('Reply vn/audio!')
+  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
+  if(vn.includes(data.body)) return data.reply('Nama vn sudah ada, harap gunakan nama lain')
+  nv = await data.downloadMediaQuotedMessage()
+  fs.writeFileSync(`./lib/vn/${data.body}.mp3`, nv)
+  global.vn.push(data.body)
+  fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn))
+  data.reply(`Berhasil menambahkan vn ${data.body} dari database`)
+}
+case 'delvn': {
+  if(!data.isOwner) return data.reply(mess.botOwner)
+  if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
+  if(!vn.includes(data.body)) return data.reply('vn tidak ditemukan!')
+  global.vn.splice(vn.indexOf(data.body), 1)
+  fs.writeFileSync('./lib/json/vn.json', JSON.stringify(vn, null, 2))
+  fs.unlinkSync(`./lib/vn/${data.body}.mp3`)
+  data.reply(`Berhasil mengahpus vn ${data.body} dari database`)
+}
+case 'listvn': {
+  if(!data.isOwner) return data.reply(mess.botOwner)
+  let listvn = 'Ketik nama vn untuk mendownload vn\n\n*List vn*:\n\n'
+  vn.forEach((vnn, i) => listvn += `*${i+1}*. ${vnn}\n`)
+  data.reply(listvn)
+}
+
 
 //Owner Menu
 case 'bcgc': case 'bcgroup': {
