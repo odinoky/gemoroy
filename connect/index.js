@@ -76,7 +76,9 @@ ppuser = await ichi.profilePictureUrl(num, 'image')
 ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
 }
 if (anu.action == 'add') {
-tekswell = `Добро пожаловать в нашу группу!\n Ознакомтесь пожайлуста с правилами группы!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n*――――――――――――――*\n\nНадеюсь, вам понравится в нашей группе!!! 🎊🎊🎉!`
+  stst = await client.getStatus(`${num.split('@')[0]}@c.us`)
+  stst = stst.status == 401 ? '' : stst.status
+tekswell = `Добро пожаловать в нашу группу!\n Ознакомтесь пожайлуста с правилами группы!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n⤔ *Bio*: ${stst}\n*――――――――――――――*\n\nНадеюсь, вам понравится в нашей группе!!! 🎊🎊🎉!`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
 teksbye = `До свидание участник\n Были рады знакомству! @${num.split("@")[0]} 👋`
