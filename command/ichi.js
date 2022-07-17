@@ -300,7 +300,7 @@ m.reply(respon)
 }
 break
 case 'addvn': {
-  if(!data.isOwner) return data.reply(mess.botOwner)
+  if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
   if(!data.isQuotedAudio) return data.reply('Reply vn/audio!')
   if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
   if(vn.includes(data.body)) return data.reply('Nama vn sudah ada, harap gunakan nama lain')
@@ -311,7 +311,7 @@ case 'addvn': {
   data.reply(`Berhasil menambahkan vn ${data.body} dari database`)
 }
 case 'delvn': {
-  if(!data.isOwner) return data.reply(mess.botOwner)
+  if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
   if(data.body == "") return data.reply(`Kirim perintah ${data.prefix}addvn [ nama ]\nContoh ${data.command}addvn hai`)
   if(!vn.includes(data.body)) return data.reply('vn tidak ditemukan!')
   global.vn.splice(vn.indexOf(data.body), 1)
@@ -320,7 +320,7 @@ case 'delvn': {
   data.reply(`Berhasil mengahpus vn ${data.body} dari database`)
 }
 case 'listvn': {
-  if(!data.isOwner) return data.reply(mess.botOwner)
+  if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
   let listvn = 'Ketik nama vn untuk mendownload vn\n\n*List vn*:\n\n'
   vn.forEach((vnn, i) => listvn += `*${i+1}*. ${vnn}\n`)
   data.reply(listvn)
