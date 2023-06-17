@@ -475,8 +475,8 @@ export async function participantsUpdate({ id, participants, action }) {
             if (chat.welcome) {
                 let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
                 for (let user of participants) {
-                    let pp = 'https://i.imgur.com/whjlJSf.jpg'
-                    let ppgp = 'https://i.imgur.com/whjlJSf.jpg'
+                    let pp = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
+                    let ppgp = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
                     try {
                         pp = await this.profilePictureUrl(user, 'image')
                         ppgp = await this.profilePictureUrl(id, 'image')
@@ -490,7 +490,7 @@ export async function participantsUpdate({ id, participants, action }) {
                                 groupicon: ppgp,
                                 membercount: groupMetadata.participants.length,
                                 profile: pp,
-                                background: 'https://i.imgur.com/bbWbASn.jpg'
+                                background: 'https://i.ibb.co/w6Vx4TR/1655889448840.png'
                             }, 'apikey')
 
                             let lea = API('fgmods', '/api/goodbye', {
@@ -499,7 +499,7 @@ export async function participantsUpdate({ id, participants, action }) {
                                 groupicon: ppgp,
                                 membercount: groupMetadata.participants.length,
                                 profile: pp,
-                                background: 'https://i.imgur.com/klTSO3d.jpg'
+                                background: 'https://i.ibb.co/w6Vx4TR/1655889448840.png'
                             }, 'apikey')
                         this.sendFile(id, action === 'add' ? wel : lea, 'pp.jpg', text, null, false, { mentions: [user] })
                         /*this.sendButton(id, text, fgig, action === 'add' ? wel : lea, [
@@ -513,7 +513,7 @@ export async function participantsUpdate({ id, participants, action }) {
         case 'promote':
             text = (chat.sPromote || this.spromote || conn.spromote || '@user ahora es administrador')
         case 'demote':
-            let pp = await this.profilePictureUrl(participants[0], 'image').catch(_ => 'https://i.imgur.com/whjlJSf.jpg') 
+            let pp = await this.profilePictureUrl(participants[0], 'image').catch(_ => 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg') 
             if (!text)
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ya no es administrador')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
