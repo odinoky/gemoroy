@@ -167,7 +167,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 }
 handler.help = ['help']
 handler.tags = ['main']
-handler.command = ['менюю'] 
+handler.command = ['menu', 'help', 'menú'] 
 handler.register = false
 
 handler.exp = 3
